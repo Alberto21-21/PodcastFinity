@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PodcastFinity - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">🎧 PodcastFinity</div>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Explorar</a>
+            <a href="#">Mi perfil</a>
+            <a href="#">Cerrar sesión</a>
+        </nav>
+    </header>
+    <main class="home-container">
+        <h1>Bienvenido a PodcastFinity</h1>
+        <p>Explora, valora y comenta tus podcasts favoritos 🎙️</p>
+        <section class="podcast-list">
+            <div class="podcast-card">
+                <h2>The Wild Project</h2>
+                <p><strong>Autor:</strong> Jordi Wild</p>
+                <p><strong>Categoría:</strong> Actualidad y entrevistas</p>
+                <p><strong>Puntuación:</strong> 4.8/5</p>
+                <button>Valorar</button>
+            </div>
+            <div class="podcast-card">
+                <h2>Offsiders</h2>
+                <p><strong>Autores:</strong> DjMaRiiO, Spursito, Kolderiu</p>
+                <p><strong>Categoría:</strong> Deportes</p>
+                <p><strong>Puntuación:</strong> 4.6/5</p>
+                <button>Valorar</button>
+            </div>
+            <div class="podcast-card">
+                <h2>Nadie Sabe Nada</h2>
+                <p><strong>Autores:</strong> Berto Romero y Andreu Buenafuente</p>
+                <p><strong>Categoría:</strong> Humor</p>
+                <p><strong>Puntuación:</strong> 4.7/5</p>
+                <button>Valorar</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 PodcastFinity - Comparte tus opiniones con el mundo</p>
+    </footer>
+    <script>
+document.querySelectorAll('.podcast-card').forEach(card => {
+    const button = card.querySelector('button');
+
+    button.addEventListener('click', () => {
+        if (card.querySelector('.rating-stars')) return;
+
+        const ratingDiv = document.createElement('div');
+        ratingDiv.className = 'rating-stars';
+
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement('span');
+            star.innerHTML = '★';
+            star.dataset.value = i;
+
+            star.addEventListener('mouseover', () => {
+                highlightStars(ratingDiv, i);
+            });
+
+            star.addEventListener('mouseout', () => {
+                highlightStars(ratingDiv, selectedValue);
+            });
+
+            star.addEventListener('click', () => {
+                selectedValue = i;
+                highlightStars(ratingDiv, i);
+                alert(`Has valorado con ${i} estrella(s).`);
+            });
+
+            ratingDiv.appendChild(star);
+        }
+
+        let selectedValue = 0;
+        card.appendChild(ratingDiv);
+    });
+
+    function highlightStars(container, count) {
+        const stars = container.querySelectorAll('span');
+        stars.forEach((star, index) => {
+            if (index < count) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
+});
+</script>
+
+</body>
+</html>
+
